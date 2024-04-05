@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 export default function Textarea({ label, value, onChange }) {
@@ -9,7 +9,7 @@ export default function Textarea({ label, value, onChange }) {
     onChange(e.target.value);
   }
   return (
-    <div>
+    <div className='input'>
       <label>{label}</label>
       <textarea value={text} onChange={handleChange} />
     </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Input from '../FormComponents/Input';
+import Button from '../FormComponents/Button';
 
 export default function PersonalInfo() {
   const [name, setName] = useState('');
@@ -18,35 +19,42 @@ export default function PersonalInfo() {
   }
 
   return (
-    <div>
+    <div className='section'>
       <h2>Personal Information</h2>
       {isEditing ? (
         <form onSubmit={handleSubmit}>
-          <Input
-            type="text"
-            label="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+          <div className='row'>
+            <Input
+              type='text'
+              label='Name'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Input
+              type='email'
+              label='Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className='row'>
+            <Input
+              type='tel'
+              label='Phone Number'
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+            <Input
+              type='text'
+              label='LinkedIn'
+              value={linkedin}
+              onChange={(e) => setLinkedin(e.target.value)}
+            />
+          </div>
+          <Button
+            label='Save'
+            type='submit'
           />
-          <Input
-            type="email"
-            label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            type="tel"
-            label="Phone Number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-          <Input
-            type="text"
-            label="LinkedIn"
-            value={linkedin}
-            onChange={(e) => setLinkedin(e.target.value)}
-          />
-          <button type='submit'>Submit</button>
         </form>
       ) : (
         <div>
@@ -54,7 +62,10 @@ export default function PersonalInfo() {
           <p>{email}</p>
           <p>{phoneNumber}</p>
           <p>{linkedin}</p>
-          <button onClick={handleEdit}>Edit</button>
+          <Button
+            label='Edit'
+            onClick={handleEdit}
+          />
         </div>
       )}
     </div>
