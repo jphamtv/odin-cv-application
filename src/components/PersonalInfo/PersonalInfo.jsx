@@ -1,13 +1,15 @@
+import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Input from '../FormComponents/Input';
 import Button from '../FormComponents/Button';
 
-export default function PersonalInfo() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [linkedin, setLinkedin] = useState('');
+export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
   const [isEditing, setIsEditing] = useState(true);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPersonalInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,47 +29,55 @@ export default function PersonalInfo() {
             <Input
               type='text'
               label='Name'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              name='fullName'
+              value={personalInfo.fullName}
+              onChange={handleChange}
             />
             <Input
               type='email'
               label='Email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name='email'
+              value={personalInfo.email}
+              onChange={handleChange}
             />
           </div>
           <div className='row'>
             <Input
               type='tel'
               label='Phone Number'
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              name='phoneNumber'
+              value={personalInfo.phoneNumber}
+              onChange={handleChange}
             />
             <Input
               type='text'
               label='LinkedIn'
-              value={linkedin}
-              onChange={(e) => setLinkedin(e.target.value)}
+              name='linkedin'
+              value={personalInfo.linkedin}
+              onChange={handleChange}
             />
           </div>
-          <Button
-            label='Save'
-            type='submit'
-          />
+          <Button label='Save' type='submit' />
         </form>
       ) : (
         <div>
-          <p>{name}</p>
-          <p>{email}</p>
-          <p>{phoneNumber}</p>
-          <p>{linkedin}</p>
-          <Button
-            label='Edit'
-            onClick={handleEdit}
-          />
+          <p>{personalInfo.fullName}</p>
+          <p>{personalInfo.email}</p>
+          <p>{personalInfo.phoneNumber}</p>
+          <p>{personalInfo.linkedin}</p>
+          <Button label='Edit' onClick={handleEdit} />
         </div>
       )}
     </div>
   );
 }
+
+PersonalInfo.propTypes = {
+  personalInfo: PropTypes.shape({
+    fullName: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string.isRequired,
+    linkedin: PropTypes.string.isRequired,
+  }).isRequired,
+  setPersonalInfo: PropTypes.func.isRequired,
+};

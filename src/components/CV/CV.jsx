@@ -7,6 +7,27 @@ import './CV.css'
 
 export default function CV() {
   const [isEditing, setIsEditing] = useState(true);
+  const [personalInfo, setPersonalInfo] = useState({
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    linkedin: '',
+  });
+  const [experience, setExperience] = useState({
+    company: '',
+    jobTitle: '',
+    startDate: '',
+    endDate: '',
+    description: '',
+  });
+  const [education, setEducation] = useState({
+    schoolName: '',
+    location: '',
+    degree: '',
+    major: '',
+    startDate: '',
+    endDate: '',
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,9 +43,17 @@ export default function CV() {
       <h1>CV Builder</h1>
       {isEditing ? (
         <div className='cv-builder'>
-          <PersonalInfo />
-          <Experience />
-          <Education />
+          <PersonalInfo
+            personalInfo={personalInfo}
+            setPersonalInfo={setPersonalInfo}/>
+          <Experience
+            experience={experience}
+            setExperience={setExperience}
+          />
+          <Education
+            education={education}
+            setEducation={setEducation}
+          />
           <Button
             label='Submit'
             type='submit'
@@ -35,10 +64,7 @@ export default function CV() {
         <>
           <div className='resume-preview'>
           </div>
-          <Button
-            label='Edit'
-            onClick={handleEdit}
-          />
+          <Button label='Edit' onClick={handleEdit} />
         </>        
       )}      
     </div>

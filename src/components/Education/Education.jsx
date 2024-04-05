@@ -1,15 +1,15 @@
+import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Input from '../FormComponents/Input';
 import Button from '../FormComponents/Button';
 
-export default function Education() {
-  const [name, setName] = useState('');
-  const [location, setLocation] = useState('');
-  const [degree, setDegree] = useState('');
-  const [major, setMajor] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+export default function Education({ education, setEducation }) {
   const [isEditing, setIsEditing] = useState(true);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEducation((prevInfo) => ({ ...prevInfo, [name]: value }));
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,62 +29,75 @@ export default function Education() {
             <Input
               type='text'
               label='School Name'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              name='schoolName'
+              value={education.schoolName}
+              onChange={handleChange}
             />
               <Input
                 type='text'
                 label='School Location'
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                name='location'
+                value={education.location}
+                onChange={handleChange}
               />
           </div>
           <div className='row'>
             <Input
               type='text'
               label='Degree or Certificate'
-              value={degree}
-              onChange={(e) => setDegree(e.target.value)}
+              name='degree'
+              value={education.degree}
+              onChange={handleChange}
             />
             <Input
               type='text'
               label='Field of Study'
-              value={major}
-              onChange={(e) => setMajor(e.target.value)}
+              name='major'
+              value={education.major}
+              onChange={handleChange}
             />
           </div>
           <div className='row'>
           <Input
             type='date'
             label='Start Date'
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
+            name='startDate'
+            value={education.startDate}
+            onChange={handleChange}
+        />
           <Input
             type='date'
             label='End Date'
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            name='endDate'
+            value={education.endDate}
+            onChange={handleChange}
           />
           </div>
-          <Button
-            label='Save'
-            type='submit'
-          />
+          <Button label='Save' type='submit' />
         </form>
       ) : (
         <div>
-          <p>{name}</p>
-          <p>{location}</p>
-          <p>{degree}</p>
-          <p>{startDate}</p>
-          <p>{endDate}</p>
-          <Button
-            label='Edit'
-            onClick={handleEdit}
-          />
+          <p>{education.schoolName}</p>
+          <p>{education.location}</p>
+          <p>{education.degree}</p>
+          <p>{education.major}</p>
+          <p>{education.startDate}</p>
+          <p>{education.endDate}</p>
+          <Button label='Edit' onClick={handleEdit} />
         </div>
       )}
     </div>
   );
 }
+
+Education.propTypes = {
+  education: PropTypes.shape({
+    schoolName: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    degree: PropTypes.string.isRequired,
+    major: PropTypes.string.isRequired,
+    startDate: PropTypes.string.isRequired,
+    endDate: PropTypes.string.isRequired,
+  }).isRequired,
+  setEducation: PropTypes.func.isRequired,
+};
