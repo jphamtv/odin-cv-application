@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Input from '../FormComponents/Input'
 import Textarea from '../FormComponents/Textarea'
 import Button from '../FormComponents/Button';
+import DateInput from '../FormComponents/DateInput';
 
 export default function Experience({ experience, setExperience }) {
   const [isEditing, setIsEditing] = useState(true);
@@ -47,6 +48,11 @@ export default function Experience({ experience, setExperience }) {
               type='date'
               label='Start Date'
               name='startDate'
+              value={experience.startDate}
+              onChange={handleChange}
+            />
+            <DateInput
+              label='Start Date'
               value={experience.startDate}
               onChange={handleChange}
             />
