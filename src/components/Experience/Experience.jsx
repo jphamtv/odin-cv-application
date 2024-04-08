@@ -10,9 +10,37 @@ export default function Experience({ experience, setExperience }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setExperience((prevInfo) => ({ ...prevInfo, [name]: value }));
+    setExperience((prevExperience) => ({ ...prevExperience, [name]: value }));
   }
 
+  const handleStartMonthChange = (e) => {
+    setExperience((prevExperience) => ({
+      ...prevExperience,
+      startDate: `${e.target.value} ${prevExperience.startDate.split(' ')[1]}`,
+    }));
+  };
+  
+  const handleStartYearChange = (e) => {
+    setExperience((prevExperience) => ({
+      ...prevExperience,
+      startDate: `${prevExperience.startDate.split(' ')[0]} ${e.target.value}`,
+    }));
+  };
+  
+  const handleEndMonthChange = (e) => {
+    setExperience((prevExperience) => ({
+      ...prevExperience,
+      endDate: `${e.target.value} ${prevExperience.endDate.split(' ')[1]}`,
+    }));
+  };
+  
+  const handleEndYearChange = (e) => {
+    setExperience((prevExperience) => ({
+      ...prevExperience,
+      endDate: `${prevExperience.endDate.split(' ')[0]} ${e.target.value}`,
+    }));
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsEditing(false);
@@ -44,24 +72,19 @@ export default function Experience({ experience, setExperience }) {
               />
           </div>
           <div className='row'>
-            <Input
-              type='date'
-              label='Start Date'
-              name='startDate'
-              value={experience.startDate}
-              onChange={handleChange}
-            />
             <DateInput
               label='Start Date'
-              value={experience.startDate}
-              onChange={handleChange}
+              month={experience.startDate.split(' ')[0]}
+              year={experience.startDate.split(' ')[1]}
+              onMonthChange={handleStartMonthChange}
+              onYearChange={handleStartYearChange}
             />
-            <Input
-              type='date'
-              label='End Date (leave blank if current)'
-              name='endDate'
-              value={experience.endDate}
-              onChange={handleChange}
+            <DateInput
+              label='End Date'
+              month={experience.endDate.split(' ')[0]}
+              year={experience.endDate.split(' ')[1]}
+              onMonthChange={handleEndMonthChange}
+              onYearChange={handleEndYearChange}
             />
           </div>
           <div className='row'>

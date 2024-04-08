@@ -9,16 +9,16 @@ export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPersonalInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsEditing(false);
-  }
+  };
 
   const handleEdit = () => {
     setIsEditing(true);
-  }
+  };
 
   return (
     <div className='section'>

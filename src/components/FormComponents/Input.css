@@ -7,13 +7,19 @@ label {
   margin-bottom: 4px;
 }
 
-input,textarea {
+input,
+textarea {
   height: 40px;
   margin-bottom: 16px;
   padding: 0 8px;
   font-size: 1rem;
+  border: 1px solid #767676;
+  border-radius: 0px;
+  background-color: #3B3B3B;
+  font-family: inherit;
 }
 
 textarea {
-  min-height: 100px;
+  min-height: 200px;
+  width: 880px;
 }

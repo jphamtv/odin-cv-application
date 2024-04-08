@@ -2,14 +2,43 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Input from '../FormComponents/Input';
 import Button from '../FormComponents/Button';
+import DateInput from '../FormComponents/DateInput';
 
 export default function Education({ education, setEducation }) {
   const [isEditing, setIsEditing] = useState(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEducation((prevInfo) => ({ ...prevInfo, [name]: value }));
+    setEducation((prevEducation) => ({ ...prevEducation, [name]: value }));
   }
+
+  const handleStartMonthChange = (e) => {
+    setEducation((prevEducation) => ({
+      ...prevEducation,
+      startDate: `${e.target.value} ${prevEducation.startDate.split(' ')[1]}`,
+    }));
+  };
+  
+  const handleStartYearChange = (e) => {
+    setEducation((prevEducation) => ({
+      ...prevEducation,
+      startDate: `${prevEducation.startDate.split(' ')[0]} ${e.target.value}`,
+    }));
+  };
+  
+  const handleEndMonthChange = (e) => {
+    setEducation((prevEducation) => ({
+      ...prevEducation,
+      endDate: `${e.target.value} ${prevEducation.endDate.split(' ')[1]}`,
+    }));
+  };
+  
+  const handleEndYearChange = (e) => {
+    setEducation((prevEducation) => ({
+      ...prevEducation,
+      endDate: `${prevEducation.endDate.split(' ')[0]} ${e.target.value}`,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,20 +87,20 @@ export default function Education({ education, setEducation }) {
             />
           </div>
           <div className='row'>
-          <Input
-            type='date'
-            label='Start Date'
-            name='startDate'
-            value={education.startDate}
-            onChange={handleChange}
-        />
-          <Input
-            type='date'
-            label='End Date'
-            name='endDate'
-            value={education.endDate}
-            onChange={handleChange}
-          />
+          <DateInput
+              label='Start Date'
+              month={education.startDate.split(' ')[0]}
+              year={education.startDate.split(' ')[1]}
+              onMonthChange={handleStartMonthChange}
+              onYearChange={handleStartYearChange}
+            />
+            <DateInput
+              label='End Date'
+              month={education.endDate.split(' ')[0]}
+              year={education.endDate.split(' ')[1]}
+              onMonthChange={handleEndMonthChange}
+              onYearChange={handleEndYearChange}
+            />
           </div>
           <Button label='Save' type='submit' />
         </form>

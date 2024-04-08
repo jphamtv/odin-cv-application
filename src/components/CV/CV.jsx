@@ -63,6 +63,24 @@ export default function CV() {
       ) : (
         <>
           <div className='resume-preview'>
+            <section className='personal-info'>
+              <p className='full-name'>{personalInfo.fullName}</p>
+              <div>
+                <p>{personalInfo.email} <span className='dot'>•</span></p>
+                <p>{personalInfo.phoneNumber} <span className='dot'>•</span></p>
+                <p>linkedin.com/in/{personalInfo.linkedin}</p>
+              </div>
+              <hr />
+            </section>
+            <section className='experience'>
+              <h3>EXPERIENCE</h3>
+              <div>
+                <p className='bold-text'>{experience.jobTitle}<span className='comma'>,</span></p>
+                <p><span className='bold-text'>{experience.company}</span><span className='dot'>—</span></p>
+                <p>({experience.startDate}—{experience.endDate})</p>
+              </div>
+                <pre>{experience.description}</pre>
+            </section>
           </div>
           <Button label='Edit' onClick={handleEdit} />
         </>        

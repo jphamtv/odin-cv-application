@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
+import './DateInput.css'
 
-export default function DateInput({ label, name, value, onChange }) {
+export default function DateInput({ label, month, year, onMonthChange, onYearChange }) {
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
@@ -8,21 +9,11 @@ export default function DateInput({ label, name, value, onChange }) {
 
   const years = Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i);
 
-  const handleMonthChange = (e) => {
-    const [_, selectedYear] = value.split(' ');
-    onChange(`${e.target.value} ${selectedYear}`);
-  }
-  
-  const handleYearChange = (e) => {
-    const [selectedMonth] = value.split(' ');
-    onChange(`${selectedMonth} ${e.target.value}`);
-  };
-
   return (
     <div className='date-input'>
       <label>{label}</label>
       <div className="input-container">
-        <select value={value.split(' ')[0]} onChange={handleMonthChange}>
+        <select value={month} onChange={onMonthChange}>
           <option value=''>Month</option>
           {months.map(month => (
             <option key={month} value={month}>
@@ -30,7 +21,7 @@ export default function DateInput({ label, name, value, onChange }) {
             </option>
           ))}
         </select>
-        <select value={value.split(' ')[1]} onChange={handleYearChange}>
+        <select value={year} onChange={onYearChange}>
           <option value=''>Year</option>
           {years.map(year => (
             <option key={year} value={year}>
@@ -45,6 +36,8 @@ export default function DateInput({ label, name, value, onChange }) {
 
 DateInput.propTypes = {
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  month: PropTypes.string.isRequired,
+  year: PropTypes.string.isRequired,
+  onMonthChange: PropTypes.func.isRequired,
+  onYearChange: PropTypes.func.isRequired,
 }

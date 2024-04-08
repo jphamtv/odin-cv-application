@@ -1,3 +1,19 @@
+h1 {
+  font-size: 3rem;
+  margin: 0 0 1.5rem;
+}
+
+hr {
+  margin: 1rem 0;
+}
+
+pre {
+  font-family: inherit;
+  font-size: 14px;
+  text-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
 .cv-builder {
   width: 960px;
 }
@@ -27,4 +43,42 @@
 
 .row > * {
   flex: 1 100%;
+}
+
+
+/* RESUME PREVIEW */
+
+.resume-preview {
+  padding: 2rem 3rem;
+  color: #2e2e2e;
+}
+
+.personal-info > div,
+.experience > div {
+  display: flex;
+}
+
+.full-name {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.dot {
+  margin: 0 0.5rem;
+}
+
+.comma {
+  margin-right: 0.5rem;
+}
+
+.bold-text {
+  font-weight: bold;
 }
