@@ -102,7 +102,9 @@ export default function Education({ education, setEducation }) {
               onYearChange={handleEndYearChange}
             />
           </div>
-          <Button label='Save' type='submit' />
+          <div className='button-container'>
+            <Button label='Save' type='submit' />
+          </div>
         </form>
       ) : (
         <div>
@@ -112,7 +114,9 @@ export default function Education({ education, setEducation }) {
           <p>{education.major}</p>
           <p>{education.startDate}</p>
           <p>{education.endDate}</p>
-          <Button label='Edit' onClick={handleEdit} />
+          <div className='button-container'>
+            <Button label='Edit' onClick={handleEdit} />
+          </div>
         </div>
       )}
     </div>

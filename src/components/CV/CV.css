@@ -45,12 +45,24 @@ pre {
   flex: 1 100%;
 }
 
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  
+}
+
 
 /* RESUME PREVIEW */
 
 .resume-preview {
-  padding: 2rem 3rem;
+  padding: 2rem 2.5rem;
   color: #2e2e2e;
+  margin-bottom: 2rem;
+}
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .personal-info > div,
@@ -75,10 +87,18 @@ h3 {
   margin: 0 0.5rem;
 }
 
+.margin-right {
+  margin-right: 0.5rem;
+}
+
 .comma {
   margin-right: 0.5rem;
 }
 
 .bold-text {
   font-weight: bold;
+}
+
+.edit-button {
+  height: 40px;
 }

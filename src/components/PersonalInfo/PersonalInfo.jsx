@@ -57,7 +57,9 @@ export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
               onChange={handleChange}
             />
           </div>
-          <Button label='Save' type='submit' />
+          <div className='button-container'>
+            <Button label='Save' type='submit' />
+          </div>
         </form>
       ) : (
         <div>
@@ -65,7 +67,9 @@ export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
           <p>{personalInfo.email}</p>
           <p>{personalInfo.phoneNumber}</p>
           <p>{personalInfo.linkedin}</p>
-          <Button label='Edit' onClick={handleEdit} />
+          <div className='button-container'>
+            <Button label='Edit' onClick={handleEdit} /> 
+          </div>   
         </div>
       )}
     </div>

@@ -17,6 +17,7 @@ textarea {
   border-radius: 0px;
   background-color: #3B3B3B;
   font-family: inherit;
+  resize: vertical;
 }
 
 textarea {

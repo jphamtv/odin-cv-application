@@ -95,7 +95,9 @@ export default function Experience({ experience, setExperience }) {
               onChange={handleChange}
             />
           </div>
-          <Button label='Save' type='submit' />
+          <div className='button-container'>
+            <Button label='Save' type='submit' /> 
+          </div>
         </form>
       ) : (
         <div>
@@ -104,7 +106,9 @@ export default function Experience({ experience, setExperience }) {
           <p>{experience.startDate}</p>
           <p>{experience.endDate}</p>
           <pre>{experience.description}</pre>
-          <Button label='Edit' onClick={handleEdit} />  
+          <div className='button-container'>
+            <Button label='Edit' onClick={handleEdit} /> 
+          </div>    
         </div>
       )}
     </div>

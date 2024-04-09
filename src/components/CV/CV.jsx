@@ -54,17 +54,22 @@ export default function CV() {
             education={education}
             setEducation={setEducation}
           />
+          <div className='button-container'>
           <Button
             label='Submit'
             type='submit'
             onClick={handleSubmit}
           />
+          </div>
         </div>
       ) : (
         <>
           <div className='resume-preview'>
             <section className='personal-info'>
-              <p className='full-name'>{personalInfo.fullName}</p>
+              <div className='resume-header'>
+                <p className='full-name'>{personalInfo.fullName}</p>
+                <Button label='Edit' onClick={handleEdit} className='edit-button'/>  
+              </div>
               <div>
                 <p>{personalInfo.email} <span className='dot'>•</span></p>
                 <p>{personalInfo.phoneNumber} <span className='dot'>•</span></p>
@@ -81,8 +86,16 @@ export default function CV() {
               </div>
                 <pre>{experience.description}</pre>
             </section>
+            <section className='experience'>
+              <h3>EDUCATION</h3>
+              <div>
+                <p className='bold-text'>{education.degree}<span className='comma'>,</span></p>
+                <p><span className='bold-text'>{education.major}</span><span className='dot'>—</span></p>
+                <p>{education.schoolName}<span className='margin-right'></span></p>
+                <p>({education.startDate}—{education.endDate})</p>
+              </div>
+            </section>
           </div>
-          <Button label='Edit' onClick={handleEdit} />
         </>        
       )}      
     </div>
