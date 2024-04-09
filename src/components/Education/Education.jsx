@@ -109,11 +109,11 @@ export default function Education({ education, setEducation }) {
       ) : (
         <div>
           <p>{education.schoolName}</p>
-          <p>{education.location}</p>
+          {/* <p>{education.location}</p>
           <p>{education.degree}</p>
           <p>{education.major}</p>
           <p>{education.startDate}</p>
-          <p>{education.endDate}</p>
+          <p>{education.endDate}</p> */}
           <div className='button-container'>
             <Button label='Edit' onClick={handleEdit} />
           </div>

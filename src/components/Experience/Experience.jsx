@@ -102,10 +102,10 @@ export default function Experience({ experience, setExperience }) {
       ) : (
         <div>
           <p>{experience.company}</p>
-          <p>{experience.jobTitle}</p>
+          {/* <p>{experience.jobTitle}</p>
           <p>{experience.startDate}</p>
           <p>{experience.endDate}</p>
-          <pre>{experience.description}</pre>
+          <pre>{experience.description}</pre> */}
           <div className='button-container'>
             <Button label='Edit' onClick={handleEdit} /> 
           </div>    
