@@ -62,11 +62,8 @@ export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
           </div>
         </form>
       ) : (
-        <div>
+        <div className='section-header'>
           <p>{personalInfo.fullName}</p>
-          <p>{personalInfo.email}</p>
-          <p>{personalInfo.phoneNumber}</p>
-          <p>{personalInfo.linkedin}</p>
           <div className='button-container'>
             <Button label='Edit' onClick={handleEdit} /> 
           </div>   
