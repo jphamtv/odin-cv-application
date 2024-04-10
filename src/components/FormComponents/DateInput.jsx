@@ -13,7 +13,7 @@ export default function DateInput({ label, month, year, onMonthChange, onYearCha
     <div className='date-input'>
       <label>{label}</label>
       <div className="input-container">
-        <select value={month} onChange={onMonthChange}>
+        <select value={month} onChange={(e) => onMonthChange(e.target.value)}>
           <option value=''>Month</option>
           {months.map(month => (
             <option key={month} value={month}>
@@ -21,7 +21,7 @@ export default function DateInput({ label, month, year, onMonthChange, onYearCha
             </option>
           ))}
         </select>
-        <select value={year} onChange={onYearChange}>
+        <select value={year} onChange={(e) => onYearChange(e.target.value)}>
           <option value=''>Year</option>
           {years.map(year => (
             <option key={year} value={year}>
