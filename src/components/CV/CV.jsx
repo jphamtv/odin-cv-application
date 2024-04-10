@@ -22,14 +22,16 @@ export default function CV() {
       description: '',
     },
   ]);
-  const [education, setEducation] = useState({
-    schoolName: '',
-    location: '',
-    degree: '',
-    major: '',
-    startDate: '',
-    endDate: '',
-  });
+  const [educations, setEducations] = useState([
+    {
+      schoolName: '',
+      location: '',
+      degree: '',
+      major: '',
+      startDate: '',
+      endDate: '',
+    },
+  ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,8 +55,8 @@ export default function CV() {
             setExperiences={setExperiences}
           />
           <Education
-            education={education}
-            setEducation={setEducation}
+            educations={educations}
+            setEducations={setEducations}
           />
           <div className='button-container'>
           <Button label='Submit' type='submit' onClick={handleSubmit} />
@@ -94,12 +96,16 @@ export default function CV() {
             </section>
             <section className='experience'>
               <h3>EDUCATION</h3>
-              <div>
-                <p className='bold-text'>{education.degree}<span className='comma'>,</span></p>
-                <p><span className='bold-text'>{education.major}</span><span className='dot'>—</span></p>
-                <p>{education.schoolName}<span className='margin-right'></span></p>
-                <p>({education.startDate}—{education.endDate})</p>
-              </div>
+              {educations.map((education, index) => (
+                <div key={index}>
+                  <div>
+                    <p className='bold-text'>{education.degree}<span className='comma'>,</span></p>
+                    <p><span className='bold-text'>{education.major}</span><span className='dot'>—</span></p>
+                    <p>{education.schoolName}<span className='margin-right'></span></p>
+                    <p>({education.startDate}—{education.endDate})</p>
+                  </div>
+                </div>
+              ))}
             </section>
           </div>
         </>        

@@ -75,7 +75,7 @@ export default function Experience({ experiences, setExperiences }) {
   const handleDeleteExperience = (indexToRemove) => {
     setExperiences(experiences.filter((experience, index) => index !== indexToRemove));
     setEditingIndex(null);
-  }
+  };
 
   return (
     <div className="section">

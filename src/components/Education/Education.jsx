@@ -4,133 +4,168 @@ import Input from '../FormComponents/Input';
 import Button from '../FormComponents/Button';
 import DateInput from '../FormComponents/DateInput';
 
-export default function Education({ education, setEducation }) {
-  const [isEditing, setIsEditing] = useState(true);
+export default function Education({ educations, setEducations }) {
+  const [editingIndex, setEditingIndex] = useState(null);
 
-  const handleChange = (e) => {
+  const handleChange = (e, index) => {
     const { name, value } = e.target;
-    setEducation((prevEducation) => ({ ...prevEducation, [name]: value }));
+    setEducations((prevEducations) => {
+      const updatedEducations = [...prevEducations];
+      updatedEducations[index] = { ...updatedEducations[index], [name]: value };
+      return updatedEducations;
+    });
   }
 
-  const handleStartMonthChange = (e) => {
-    setEducation((prevEducation) => ({
-      ...prevEducation,
-      startDate: `${e.target.value} ${prevEducation.startDate.split(' ')[1]}`,
-    }));
+  const handleStartMonthChange = (month, index) => {
+    setEducations((prevEducations) => {
+      const updatedEducations = [...prevEducations];
+      updatedEducations[index].startDate = `${month} ${updatedEducations[index].startDate.split(' ')[1]}`;
+      return updatedEducations;
+    });
   };
   
-  const handleStartYearChange = (e) => {
-    setEducation((prevEducation) => ({
-      ...prevEducation,
-      startDate: `${prevEducation.startDate.split(' ')[0]} ${e.target.value}`,
-    }));
+  const handleStartYearChange = (year, index) => {
+    setEducations((prevEducations) => {
+      const updatedEducations = [...prevEducations];
+      updatedEducations[index].startDate = `${updatedEducations[index].startDate.split(' ')[0]} ${year}`;
+      return updatedEducations;
+    });
   };
   
-  const handleEndMonthChange = (e) => {
-    setEducation((prevEducation) => ({
-      ...prevEducation,
-      endDate: `${e.target.value} ${prevEducation.endDate.split(' ')[1]}`,
-    }));
+  const handleEndMonthChange = (month, index) => {
+    setEducations((prevEducations) => {
+      const updatedEducations = [...prevEducations];
+      updatedEducations[index].endDate = `${month} ${updatedEducations[index].endDate.split(' ')[1]}`;
+      return updatedEducations;
+    });
   };
   
-  const handleEndYearChange = (e) => {
-    setEducation((prevEducation) => ({
-      ...prevEducation,
-      endDate: `${prevEducation.endDate.split(' ')[0]} ${e.target.value}`,
-    }));
+  const handleEndYearChange = (year, index) => {
+    setEducations((prevEducations) => {
+      const updatedEducations = [...prevEducations];
+      updatedEducations[index].endDate = `${updatedEducations[index].endDate.split(' ')[0]} ${year}`;
+      return updatedEducations;
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsEditing(false);
-  }
+    setEditingIndex(null);
+  };
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  }
+  const handleEdit = (index) => {
+    setEditingIndex(index);
+  };
+
+  const handleAddEducation = () => {
+    setEducations((prevEducations) => [
+      ...prevEducations,
+      {
+        schoolName: '',
+        location: '',
+        degree: '',
+        major: '',
+        startDate: '',
+        endDate: '',
+      },
+    ]);
+    setEditingIndex(educations.length);
+  };
+
+  const handleDeleteEducation = (indexToRemove) => {
+    setEducations(educations.filter((education, index) => index !== indexToRemove));
+    setEditingIndex(null);
+  };
 
   return (
     <div className='section'>
-      <h2>Education</h2>
-      {isEditing ? (
-        <form onSubmit={handleSubmit}>
-          <div className='row'>
-            <Input
-              type='text'
-              label='School Name'
-              name='schoolName'
-              value={education.schoolName}
-              onChange={handleChange}
-            />
-              <Input
-                type='text'
-                label='School Location'
-                name='location'
-                value={education.location}
-                onChange={handleChange}
-              />
-          </div>
-          <div className='row'>
-            <Input
-              type='text'
-              label='Degree or Certificate'
-              name='degree'
-              value={education.degree}
-              onChange={handleChange}
-            />
-            <Input
-              type='text'
-              label='Field of Study'
-              name='major'
-              value={education.major}
-              onChange={handleChange}
-            />
-          </div>
-          <div className='row'>
-          <DateInput
-              label='Start Date'
-              month={education.startDate.split(' ')[0]}
-              year={education.startDate.split(' ')[1]}
-              onMonthChange={handleStartMonthChange}
-              onYearChange={handleStartYearChange}
-            />
-            <DateInput
-              label='End Date'
-              month={education.endDate.split(' ')[0]}
-              year={education.endDate.split(' ')[1]}
-              onMonthChange={handleEndMonthChange}
-              onYearChange={handleEndYearChange}
-            />
-          </div>
-          <div className='button-container'>
-            <Button label='Save' type='submit' />
-          </div>
-        </form>
-      ) : (
-        <div>
-          <p>{education.schoolName}</p>
-          {/* <p>{education.location}</p>
-          <p>{education.degree}</p>
-          <p>{education.major}</p>
-          <p>{education.startDate}</p>
-          <p>{education.endDate}</p> */}
-          <div className='button-container'>
-            <Button label='Edit' onClick={handleEdit} />
-          </div>
+      <div className='section-header'>
+        <h2>Education</h2>
+        <div className='button-container'>
+          <Button label='Add Education' onClick={handleAddEducation} className='add-button' />
         </div>
-      )}
+      </div>
+      {educations.map((education, index) => (
+        <div key={index}>
+          {editingIndex === index ? (
+            <form onSubmit={handleSubmit}>
+              <div className='row'>
+                <Input
+                  type='text'
+                  label='School Name'
+                  name='schoolName'
+                  value={education.schoolName}
+                  onChange={(e) => handleChange(e, index)}
+                />
+                  <Input
+                    type='text'
+                    label='School Location'
+                    name='location'
+                    value={education.location}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+              </div>
+              <div className='row'>
+                <Input
+                  type='text'
+                  label='Degree or Certificate'
+                  name='degree'
+                  value={education.degree}
+                  onChange={(e) => handleChange(e, index)}
+                />
+                <Input
+                  type='text'
+                  label='Field of Study'
+                  name='major'
+                  value={education.major}
+                  onChange={(e) => handleChange(e, index)}
+                />
+              </div>
+              <div className='row'>
+              <DateInput
+                  label='Start Date'
+                  month={education.startDate.split(' ')[0]}
+                  year={education.startDate.split(' ')[1]}
+                  onMonthChange={(month) => handleStartMonthChange(month, index)}
+                  onYearChange={(year) => handleStartYearChange(year, index)}
+                />
+                <DateInput
+                  label='End Date'
+                  month={education.endDate.split(' ')[0]}
+                  year={education.endDate.split(' ')[1]}
+                  onMonthChange={(month) => handleEndMonthChange(month, index)}
+                  onYearChange={(year) => handleEndYearChange(year, index)}
+                />
+              </div>
+              <div className='button-container'>
+                <Button label='Delete' onClick={() => handleDeleteEducation(index)} />
+                <Button label='Save' type='submit' />
+              </div>
+            </form>          
+          ) : education.schoolName ? (
+            <div className='section-header'>
+              <p>{education.schoolName}</p>
+              <div className='button-container'>
+                <Button label='Edit' onClick={() => handleEdit(index)} />
+              </div>
+            </div>            
+          ) : null}
+        </div>
+      ))}
     </div>
   );
 }
 
 Education.propTypes = {
-  education: PropTypes.shape({
-    schoolName: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-    degree: PropTypes.string.isRequired,
-    major: PropTypes.string.isRequired,
-    startDate: PropTypes.string.isRequired,
-    endDate: PropTypes.string.isRequired,
-  }).isRequired,
-  setEducation: PropTypes.func.isRequired,
+  educations: PropTypes.arrayOf(
+    PropTypes.shape({
+      schoolName: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      degree: PropTypes.string.isRequired,
+      major: PropTypes.string.isRequired,
+      startDate: PropTypes.string.isRequired,
+      endDate: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  setEducations: PropTypes.func.isRequired,
 };
