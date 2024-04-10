@@ -5,123 +5,152 @@ import Textarea from '../FormComponents/Textarea'
 import Button from '../FormComponents/Button';
 import DateInput from '../FormComponents/DateInput';
 
-export default function Experience({ experience, setExperience }) {
-  const [isEditing, setIsEditing] = useState(true);
+export default function Experience({ experiences, setExperiences }) {
+  const [editingIndex, setEditingIndex] = useState(null);
 
-  const handleChange = (e) => {
+  const handleChange = (e, index) => {
     const { name, value } = e.target;
-    setExperience((prevExperience) => ({ ...prevExperience, [name]: value }));
+    setExperiences((prevExperiences) => {
+      const updatedExperiences = [...prevExperiences];
+      updatedExperiences[index] = { ...updatedExperiences[index], [name]: value };
+      return updatedExperiences;
+    });
   }
 
-  const handleStartMonthChange = (e) => {
-    setExperience((prevExperience) => ({
-      ...prevExperience,
-      startDate: `${e.target.value} ${prevExperience.startDate.split(' ')[1]}`,
-    }));
+  const handleStartMonthChange = (month, index) => {
+    setExperiences((prevExperiences) => {
+      const updatedExperiences = [...prevExperiences];
+      updatedExperiences[index].startDate = `${month} ${updatedExperiences[index].startDate.split(' ')[1]}`;
+      return updatedExperiences;
+    });
   };
   
-  const handleStartYearChange = (e) => {
-    setExperience((prevExperience) => ({
-      ...prevExperience,
-      startDate: `${prevExperience.startDate.split(' ')[0]} ${e.target.value}`,
-    }));
+  const handleStartYearChange = (year, index) => {
+    setExperiences((prevExperiences) => {
+      const updatedExperiences = [...prevExperiences];
+      updatedExperiences[index].startDate = `${updatedExperiences[index].startDate.split(' ')[0]} ${year}`;
+      return updatedExperiences;
+    });
   };
-  
-  const handleEndMonthChange = (e) => {
-    setExperience((prevExperience) => ({
-      ...prevExperience,
-      endDate: `${e.target.value} ${prevExperience.endDate.split(' ')[1]}`,
-    }));
+
+  const handleEndMonthChange = (month, index) => {
+    setExperiences((prevExperiences) => {
+      const updatedExperiences = [...prevExperiences];
+      updatedExperiences[index].endDate = `${month} ${updatedExperiences[index].endDate.split(' ')[1]}`;
+      return updatedExperiences;
+    });
   };
-  
-  const handleEndYearChange = (e) => {
-    setExperience((prevExperience) => ({
-      ...prevExperience,
-      endDate: `${prevExperience.endDate.split(' ')[0]} ${e.target.value}`,
-    }));
+
+  const handleEndYearChange = (year, index) => {
+    setExperiences((prevExperiences) => {
+      const updatedExperiences = [...prevExperiences];
+      updatedExperiences[index].endDate = `${updatedExperiences[index].endDate.split(' ')[0]} ${year}`;
+      return updatedExperiences;
+    });
   };
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsEditing(false);
-  }
+    setEditingIndex(null);
+  };
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  }
+  const handleEdit = (index) => {
+    setEditingIndex(index);
+  };
+
+  const handleAddExperience = () => {
+    setExperiences((prevExperiences) => [
+      ...prevExperiences,
+      {
+        company: '',
+        jobTitle: '',
+        startDate: '',
+        endDate: '',
+        description: '',
+      },
+    ]);
+    setEditingIndex(experiences.length);
+  };
 
   return (
-    <div className='section'>
-      <h2>Experience</h2>
-      {isEditing ? (
-        <form onSubmit={handleSubmit}>
-          <div className='row'>
-            <Input
-              type='text'
-              label='Company Name'
-              name='company'
-              value={experience.company}
-              onChange={handleChange}
-            />
-              <Input
-                type='text'
-                label='Job Title'
-                name='jobTitle'
-                value={experience.jobTitle}
-                onChange={handleChange}
-              />
-          </div>
-          <div className='row'>
-            <DateInput
-              label='Start Date'
-              month={experience.startDate.split(' ')[0]}
-              year={experience.startDate.split(' ')[1]}
-              onMonthChange={handleStartMonthChange}
-              onYearChange={handleStartYearChange}
-            />
-            <DateInput
-              label='End Date'
-              month={experience.endDate.split(' ')[0]}
-              year={experience.endDate.split(' ')[1]}
-              onMonthChange={handleEndMonthChange}
-              onYearChange={handleEndYearChange}
-            />
-          </div>
-          <div className='row'>
-            <Textarea
-              label='Description'
-              name='description'
-              value={experience.description}
-              onChange={handleChange}
-            />
-          </div>
-          <div className='button-container'>
-            <Button label='Save' type='submit' /> 
-          </div>
-        </form>
-      ) : (
-        <div>
-          <p>{experience.company}</p>
-          {/* <p>{experience.jobTitle}</p>
-          <p>{experience.startDate}</p>
-          <p>{experience.endDate}</p>
-          <pre>{experience.description}</pre> */}
-          <div className='button-container'>
-            <Button label='Edit' onClick={handleEdit} /> 
-          </div>    
+    <div className="section">
+      <div className="section-header">
+        <h2>Experience</h2>
+        <div className="button-container">
+          <Button label="Add Experience" onClick={handleAddExperience} className="add-button" />
         </div>
-      )}
+      </div>
+      {experiences.map((experience, index) => (
+        <div key={index}>
+          {editingIndex === index ? (
+            <form onSubmit={handleSubmit}>  
+              <div className='row'>
+                <Input
+                  type='text'
+                  label='Company Name'
+                  name='company'
+                  value={experience.company}
+                  onChange={(e) => handleChange(e, index)}
+                />
+                <Input
+                  type='text'
+                  label='Job Title'
+                  name='jobTitle'
+                  value={experience.jobTitle}
+                  onChange={(e) => handleChange(e, index)}
+                />
+              </div>
+              <div className='row'>
+                <DateInput
+                  label='Start Date'
+                  month={experience.startDate.split(' ')[0]}
+                  year={experience.startDate.split(' ')[1]}
+                  onMonthChange={(month) => handleStartMonthChange(month, index)}
+                  onYearChange={(year) => handleStartYearChange(year, index)}
+                />
+                <DateInput
+                  label='End Date'
+                  month={experience.endDate.split(' ')[0]}
+                  year={experience.endDate.split(' ')[1]}
+                  onMonthChange={(month) => handleEndMonthChange(month, index)}
+                  onYearChange={(year) => handleEndYearChange(year, index)}
+                />
+              </div>
+              <div className='row'>
+                <Textarea
+                  label='Description'
+                  name='description'
+                  value={experience.description}
+                  onChange={(e) => handleChange(e, index)}
+                />
+              </div>
+              <div className='button-container'>
+                <Button label='Save' type='submit' />
+              </div>
+            </form>
+          ) : experience.company ? (
+            <div className='section-header'>
+              <p>{experience.company}</p>
+              <div className='button-container'>
+                <Button label='Edit' onClick={() => handleEdit(index)} />
+              </div>
+            </div>
+          ) : null}
+        </div>
+      ))}
     </div>
   );
 }
 
 Experience.propTypes = {
-  experience: PropTypes.shape({
-    company: PropTypes.string.isRequired,
-    jobTitle: PropTypes.string.isRequired,
-    startDate: PropTypes.string.isRequired,
-    endDate: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  }).isRequired,
-  setExperience: PropTypes.func.isRequired,
+  experiences: PropTypes.arrayOf(
+    PropTypes.shape({
+      company: PropTypes.string.isRequired,
+      jobTitle: PropTypes.string.isRequired,
+      startDate: PropTypes.string.isRequired,
+      endDate: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  setExperiences: PropTypes.func.isRequired,
 };

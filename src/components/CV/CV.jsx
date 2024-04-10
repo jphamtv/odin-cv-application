@@ -13,13 +13,15 @@ export default function CV() {
     phoneNumber: '',
     linkedin: '',
   });
-  const [experience, setExperience] = useState({
-    company: '',
-    jobTitle: '',
-    startDate: '',
-    endDate: '',
-    description: '',
-  });
+  const [experiences, setExperiences] = useState([
+    {
+      company: '',
+      jobTitle: '',
+      startDate: '',
+      endDate: '',
+      description: '',
+    },
+  ]);
   const [education, setEducation] = useState({
     schoolName: '',
     location: '',
@@ -47,19 +49,15 @@ export default function CV() {
             personalInfo={personalInfo}
             setPersonalInfo={setPersonalInfo}/>
           <Experience
-            experience={experience}
-            setExperience={setExperience}
+            experiences={experiences}
+            setExperiences={setExperiences}
           />
           <Education
             education={education}
             setEducation={setEducation}
           />
           <div className='button-container'>
-          <Button
-            label='Submit'
-            type='submit'
-            onClick={handleSubmit}
-          />
+          <Button label='Submit' type='submit' onClick={handleSubmit} />
           </div>
         </div>
       ) : (
@@ -68,7 +66,11 @@ export default function CV() {
             <section className='personal-info'>
               <div className='resume-header'>
                 <p className='full-name'>{personalInfo.fullName}</p>
-                <Button label='Edit' onClick={handleEdit} className='edit-button'/>  
+                <Button
+                  label='Edit'
+                  onClick={handleEdit}
+                  className='edit-button'
+                />  
               </div>
               <div>
                 <p>{personalInfo.email} <span className='dot'>•</span></p>
@@ -79,12 +81,16 @@ export default function CV() {
             </section>
             <section className='experience'>
               <h3>EXPERIENCE</h3>
-              <div>
-                <p className='bold-text'>{experience.jobTitle}<span className='comma'>,</span></p>
-                <p><span className='bold-text'>{experience.company}</span><span className='dot'>—</span></p>
-                <p>({experience.startDate}—{experience.endDate})</p>
-              </div>
-                <pre>{experience.description}</pre>
+              {experiences.map((experience, index) => (
+                <div key={index}>
+                  <div>
+                    <p className='bold-text'>{experience.jobTitle}<span className='comma'>,</span></p>
+                    <p><span className='bold-text'>{experience.company}</span><span className='dot'>—</span></p>
+                    <p>({experience.startDate}—{experience.endDate})</p>
+                  </div>
+                  <pre>{experience.description}</pre>
+                </div>
+              ))}
             </section>
             <section className='experience'>
               <h3>EDUCATION</h3>
