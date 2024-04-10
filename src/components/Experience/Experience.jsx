@@ -57,7 +57,7 @@ export default function Experience({ experiences, setExperiences }) {
   const handleEdit = (index) => {
     setEditingIndex(index);
   };
-
+  
   const handleAddExperience = () => {
     setExperiences((prevExperiences) => [
       ...prevExperiences,
@@ -71,6 +71,11 @@ export default function Experience({ experiences, setExperiences }) {
     ]);
     setEditingIndex(experiences.length);
   };
+  
+  const handleDeleteExperience = (indexToRemove) => {
+    setExperiences(experiences.filter((experience, index) => index !== indexToRemove));
+    setEditingIndex(null);
+  }
 
   return (
     <div className="section">
@@ -125,6 +130,7 @@ export default function Experience({ experiences, setExperiences }) {
                 />
               </div>
               <div className='button-container'>
+                <Button label='Delete' onClick={() => handleDeleteExperience(index)} />
                 <Button label='Save' type='submit' />
               </div>
             </form>
