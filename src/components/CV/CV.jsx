@@ -74,7 +74,7 @@ export default function CV() {
                   className='edit-button'
                 />  
               </div>
-              <div>
+              <div className='font-14px'>
                 <p>{personalInfo.email} <span className='dot'>•</span></p>
                 <p>{personalInfo.phoneNumber} <span className='dot'>•</span></p>
                 <p>linkedin.com/in/{personalInfo.linkedin}</p>
@@ -83,22 +83,33 @@ export default function CV() {
             </section>
             <section>
               <h3>EXPERIENCE</h3>
-              {experiences.map((experience, index) => (
+              {experiences
+              .filter((experience) => experience.company)
+              .map((experience, index) => (
                 <div key={index}>
-                  {/* <div className='flex-container'>
-                    <p className='bold-text'>{experience.jobTitle}<span className='comma'>,</span></p>
-                    <p><span className='bold-text'>{experience.company}</span><span className='dot'>—</span></p>
-                    <p>({experience.startDate}—{experience.endDate})</p>
-                  </div> */}
+                  <p className='font-14px'>
+                    <span className='bold-text'>{experience.jobTitle}</span>
+                    {experience.company && (
+                      <>
+                        <span>,</span>
+                        <span className='bold-text'>{experience.company}</span>
+                      </>
+                    )}
+                    {experience.startDate && experience.endDate && (
+                      <span>- ({experience.startDate}—{experience.endDate})</span>
+                    )}
+                  </p>
                   <pre>{experience.description}</pre>
                 </div>
               ))}
             </section>
             <section>
               <h3>EDUCATION</h3>
-              {educations.map((education, index) => (
+              {educations
+              .filter((education) => education.schoolName)
+              .map((education, index) => (
                 <div key={index}>
-                  <p>
+                  <p className='font-14px'>
                     <span className='bold-text'>{education.degree}</span>
                     {education.major && (
                       <>
