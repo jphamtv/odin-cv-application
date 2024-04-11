@@ -3,9 +3,9 @@ import PersonalInfo from '../PersonalInfo/PersonalInfo';
 import Experience from '../Experience/Experience';
 import Education from '../Education/Education';
 import Button from '../FormComponents/Button';
-import './CV.css'
+import './Resume.css'
 
-export default function CV() {
+export default function Resume() {
   const [isEditing, setIsEditing] = useState(true);
   const [personalInfo, setPersonalInfo] = useState({
     fullName: '',
@@ -42,11 +42,15 @@ export default function CV() {
     setIsEditing(true);
   }
 
+  const handlePrint = () => {
+    window.print();
+  }
+
   return (
     <div>
-      <h1>CV Builder</h1>
+      <h1>Resume Builder</h1>
       {isEditing ? (
-        <div className='cv-builder'>
+        <div className='resume-builder'>
           <PersonalInfo
             personalInfo={personalInfo}
             setPersonalInfo={setPersonalInfo}/>
@@ -59,7 +63,7 @@ export default function CV() {
             setEducations={setEducations}
           />
           <div className='submit-button-container'>
-          <Button label='See CV Preview' type='submit' onClick={handleSubmit} className='submit-button' />
+          <Button label='View Resume' type='submit' onClick={handleSubmit} className='submit-button' />
           </div>
         </div>
       ) : (
@@ -68,11 +72,18 @@ export default function CV() {
             <section className='personal-info'>
               <div className='resume-header'>
                 <p className='full-name'>{personalInfo.fullName}</p>
-                <Button
-                  label='Edit'
-                  onClick={handleEdit}
-                  className='edit-button'
-                />  
+                <div className="resume-button-container">
+                  <Button
+                    label='Edit'
+                    onClick={handleEdit}
+                    className='edit-button'
+                    />  
+                  <Button
+                    label='Print Resume'
+                    onClick={handlePrint}
+                    className='print-button'
+                    />                  
+                </div>
               </div>
               <div className='font-14px'>
                 <p>{personalInfo.email} <span className='dot'>•</span></p>
@@ -92,11 +103,11 @@ export default function CV() {
                     {experience.company && (
                       <>
                         <span>,</span>
-                        <span className='bold-text'>{experience.company}</span>
+                        <span className='bold-text'> {experience.company}</span>
                       </>
                     )}
                     {experience.startDate && experience.endDate && (
-                      <span>- ({experience.startDate}—{experience.endDate})</span>
+                      <span> - ({experience.startDate}—{experience.endDate})</span>
                     )}
                   </p>
                   <pre>{experience.description}</pre>

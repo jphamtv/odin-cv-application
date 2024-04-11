@@ -14,7 +14,7 @@ pre {
   margin-top: 0;
 }
 
-.cv-builder {
+.resume-builder {
   width: 960px;
 }
 
@@ -134,4 +134,37 @@ h3 {
 
 .font-14px {
   font-size: 14px;
+}
+
+.resume-button-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+
+/* Print */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .resume-preview,
+  .resume-preview * {
+    visibility: visible;
+  }
+
+  .edit-button {
+    visibility: hidden;
+  }
+
+  .resume-preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 40px;
+  }
 }

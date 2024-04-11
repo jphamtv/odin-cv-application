@@ -21,7 +21,8 @@ button:focus-visible {
 }
 
 .edit-button,
-.add-button {
+.add-button,
+.print-button {
   height: 40px;
 }
 

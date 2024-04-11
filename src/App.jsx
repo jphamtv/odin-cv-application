@@ -1,10 +1,10 @@
 import './style.css'
-import CV from './components/CV/CV'
+import Resume from './components/Resume/Resume'
 
 export default function App() {
   return (
     <div>
-      <CV />
+      <Resume />
     </div>
   );
 }
