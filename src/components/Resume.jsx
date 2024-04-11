@@ -92,9 +92,15 @@ export default function Resume() {
               </div>
               <div className='font-14px'>
                 <p>
+                {personalInfo.email && (
                   <span>{personalInfo.email}</span>
-                  <span> • {personalInfo.phoneNumber}</span>
-                  <span> • linkedin.com/in/{personalInfo.linkedin}</span>
+                )}
+                {personalInfo.phoneNumber && (
+                  <span> • {personalInfo.phoneNumber}</span>                    
+                )}
+                {personalInfo.linkedin && (
+                  <span> • {personalInfo.linkedin}</span>
+                )}
                 </p>
               </div>
               <hr />

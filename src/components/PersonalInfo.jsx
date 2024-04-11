@@ -51,7 +51,7 @@ export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
             />
             <Input
               type='text'
-              label='LinkedIn'
+              label='LinkedIn URL'
               name='linkedin'
               value={personalInfo.linkedin}
               onChange={handleChange}
