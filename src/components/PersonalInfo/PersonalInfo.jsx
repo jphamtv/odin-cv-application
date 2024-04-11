@@ -24,7 +24,7 @@ export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
     <div className='section'>
       <h2>Personal Information</h2>
       {isEditing ? (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='personal-info-form'>
           <div className='row'>
             <Input
               type='text'
@@ -65,7 +65,7 @@ export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
         <div className='section-header'>
           <p>{personalInfo.fullName}</p>
           <div className='button-container'>
-            <Button label='Edit' onClick={handleEdit} /> 
+            <Button label='Edit' onClick={handleEdit} className='edit-button'/> 
           </div>   
         </div>
       )}

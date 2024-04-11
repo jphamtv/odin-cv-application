@@ -137,16 +137,16 @@ export default function Education({ educations, setEducations }) {
                   onYearChange={(year) => handleEndYearChange(year, index)}
                 />
               </div>
-              <div className='button-container'>
-                <Button label='Delete' onClick={() => handleDeleteEducation(index)} />
+              <div className='form-button-container'>
+                <Button label='Delete' onClick={() => handleDeleteEducation(index)} className='delete-button' />
                 <Button label='Save' type='submit' />
               </div>
             </form>          
           ) : education.schoolName ? (
-            <div className='section-header'>
-              <p>{education.schoolName}</p>
+            <div className='form-container-closed'>
+              <p>{education.schoolName} ({education.startDate}—{education.endDate})</p>
               <div className='button-container'>
-                <Button label='Edit' onClick={() => handleEdit(index)} />
+                <Button label='Edit' onClick={() => handleEdit(index)} className='edit-button' />
               </div>
             </div>            
           ) : null}

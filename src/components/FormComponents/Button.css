@@ -24,3 +24,18 @@ button:focus-visible {
 .add-button {
   height: 40px;
 }
+
+.edit-button {
+  background-color: gray;
+}
+
+.delete-button {
+  background-color: rgb(212, 26, 26);
+}
+
+.submit-button {
+  height: 60px;
+  width: 260px;
+  font-size: 1rem;
+  font-weight: bold;
+}

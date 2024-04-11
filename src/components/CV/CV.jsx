@@ -58,8 +58,8 @@ export default function CV() {
             educations={educations}
             setEducations={setEducations}
           />
-          <div className='button-container'>
-          <Button label='Submit' type='submit' onClick={handleSubmit} />
+          <div className='submit-button-container'>
+          <Button label='See CV Preview' type='submit' onClick={handleSubmit} className='submit-button' />
           </div>
         </div>
       ) : (
@@ -81,29 +81,36 @@ export default function CV() {
               </div>
               <hr />
             </section>
-            <section className='experience'>
+            <section>
               <h3>EXPERIENCE</h3>
               {experiences.map((experience, index) => (
                 <div key={index}>
-                  <div>
+                  {/* <div className='flex-container'>
                     <p className='bold-text'>{experience.jobTitle}<span className='comma'>,</span></p>
                     <p><span className='bold-text'>{experience.company}</span><span className='dot'>—</span></p>
                     <p>({experience.startDate}—{experience.endDate})</p>
-                  </div>
+                  </div> */}
                   <pre>{experience.description}</pre>
                 </div>
               ))}
             </section>
-            <section className='experience'>
+            <section>
               <h3>EDUCATION</h3>
               {educations.map((education, index) => (
                 <div key={index}>
-                  <div>
-                    <p className='bold-text'>{education.degree}<span className='comma'>,</span></p>
-                    <p><span className='bold-text'>{education.major}</span><span className='dot'>—</span></p>
-                    <p>{education.schoolName}<span className='margin-right'></span></p>
-                    <p>({education.startDate}—{education.endDate})</p>
-                  </div>
+                  <p>
+                    <span className='bold-text'>{education.degree}</span>
+                    {education.major && (
+                      <>
+                        <span>,</span>
+                        <span className='bold-text'> {education.major}</span>
+                      </>
+                    )}
+                    {education.schoolName && <span> - {education.schoolName}</span>}
+                    {education.startDate && education.endDate && (
+                      <span> ({education.startDate}—{education.endDate})</span>
+                    )}
+                  </p>
                 </div>
               ))}
             </section>

@@ -129,16 +129,16 @@ export default function Experience({ experiences, setExperiences }) {
                   onChange={(e) => handleChange(e, index)}
                 />
               </div>
-              <div className='button-container'>
-                <Button label='Delete' onClick={() => handleDeleteExperience(index)} />
+              <div className='form-button-container'>
+                <Button label='Delete' onClick={() => handleDeleteExperience(index)} className='delete-button' />
                 <Button label='Save' type='submit' />
               </div>
             </form>
           ) : experience.company ? (
-            <div className='section-header'>
-              <p>{experience.company}</p>
+            <div className='form-container-closed'>
+                <p>{experience.company} ({experience.startDate}—{experience.endDate})</p>
               <div className='button-container'>
-                <Button label='Edit' onClick={() => handleEdit(index)} />
+                <Button label='Edit' onClick={() => handleEdit(index) } className='edit-button' />
               </div>
             </div>
           ) : null}
