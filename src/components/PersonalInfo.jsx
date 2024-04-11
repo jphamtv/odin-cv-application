@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import Input from '../FormComponents/Input';
-import Button from '../FormComponents/Button';
+import Input from './UI/Input';
+import Button from './UI/Button';
 
 export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
   const [isEditing, setIsEditing] = useState(true);
@@ -65,7 +65,11 @@ export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
         <div className='section-header'>
           <p>{personalInfo.fullName}</p>
           <div className='button-container'>
-            <Button label='Edit' onClick={handleEdit} className='edit-button'/> 
+            <Button
+              label='Edit'
+              onClick={handleEdit}
+              className='edit-button'
+            /> 
           </div>   
         </div>
       )}

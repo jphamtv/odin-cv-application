@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import PersonalInfo from '../PersonalInfo/PersonalInfo';
-import Experience from '../Experience/Experience';
-import Education from '../Education/Education';
-import Button from '../FormComponents/Button';
+import PersonalInfo from './PersonalInfo';
+import Experience from './Experience';
+import Education from './Education';
+import Button from './UI/Button';
 import './Resume.css'
 
 export default function Resume() {
@@ -63,7 +63,12 @@ export default function Resume() {
             setEducations={setEducations}
           />
           <div className='submit-button-container'>
-          <Button label='View Resume' type='submit' onClick={handleSubmit} className='submit-button' />
+            <Button
+              label='View Resume'
+              type='submit'
+              onClick={handleSubmit}
+              className='submit-button'
+            />
           </div>
         </div>
       ) : (
@@ -86,9 +91,11 @@ export default function Resume() {
                 </div>
               </div>
               <div className='font-14px'>
-                <p>{personalInfo.email} <span className='dot'>•</span></p>
-                <p>{personalInfo.phoneNumber} <span className='dot'>•</span></p>
-                <p>linkedin.com/in/{personalInfo.linkedin}</p>
+                <p>
+                  <span>{personalInfo.email}</span>
+                  <span> • {personalInfo.phoneNumber}</span>
+                  <span> • linkedin.com/in/{personalInfo.linkedin}</span>
+                </p>
               </div>
               <hr />
             </section>
@@ -101,10 +108,7 @@ export default function Resume() {
                   <p className='font-14px'>
                     <span className='bold-text'>{experience.jobTitle}</span>
                     {experience.company && (
-                      <>
-                        <span>,</span>
-                        <span className='bold-text'> {experience.company}</span>
-                      </>
+                      <span className='bold-text'>, {experience.company}</span>
                     )}
                     {experience.startDate && experience.endDate && (
                       <span> - ({experience.startDate}—{experience.endDate})</span>
@@ -123,14 +127,11 @@ export default function Resume() {
                   <p className='font-14px'>
                     <span className='bold-text'>{education.degree}</span>
                     {education.major && (
-                      <>
-                        <span>,</span>
-                        <span className='bold-text'> {education.major}</span>
-                      </>
+                      <span className='bold-text'>, {education.major}</span>
                     )}
                     {education.schoolName && <span> - {education.schoolName}</span>}
                     {education.startDate && education.endDate && (
-                      <span> ({education.startDate}—{education.endDate})</span>
+                      <span> - ({education.startDate}—{education.endDate})</span>
                     )}
                   </p>
                 </div>

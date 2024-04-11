@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import Input from '../FormComponents/Input';
-import Button from '../FormComponents/Button';
-import DateInput from '../FormComponents/DateInput';
+import Input from './UI/Input';
+import Button from './UI/Button';
+import DateInput from './UI/DateInput';
 
 export default function Education({ educations, setEducations }) {
   const [editingIndex, setEditingIndex] = useState(null);
@@ -11,7 +11,8 @@ export default function Education({ educations, setEducations }) {
     const { name, value } = e.target;
     setEducations((prevEducations) => {
       const updatedEducations = [...prevEducations];
-      updatedEducations[index] = { ...updatedEducations[index], [name]: value };
+      updatedEducations[index] =
+        { ...updatedEducations[index], [name]: value };
       return updatedEducations;
     });
   }
@@ -19,7 +20,8 @@ export default function Education({ educations, setEducations }) {
   const handleStartMonthChange = (month, index) => {
     setEducations((prevEducations) => {
       const updatedEducations = [...prevEducations];
-      updatedEducations[index].startDate = `${month} ${updatedEducations[index].startDate.split(' ')[1]}`;
+      updatedEducations[index].startDate =
+        `${month} ${updatedEducations[index].startDate.split(' ')[1]}`;
       return updatedEducations;
     });
   };
@@ -27,7 +29,8 @@ export default function Education({ educations, setEducations }) {
   const handleStartYearChange = (year, index) => {
     setEducations((prevEducations) => {
       const updatedEducations = [...prevEducations];
-      updatedEducations[index].startDate = `${updatedEducations[index].startDate.split(' ')[0]} ${year}`;
+      updatedEducations[index].startDate =
+        `${updatedEducations[index].startDate.split(' ')[0]} ${year}`;
       return updatedEducations;
     });
   };
@@ -35,7 +38,8 @@ export default function Education({ educations, setEducations }) {
   const handleEndMonthChange = (month, index) => {
     setEducations((prevEducations) => {
       const updatedEducations = [...prevEducations];
-      updatedEducations[index].endDate = `${month} ${updatedEducations[index].endDate.split(' ')[1]}`;
+      updatedEducations[index].endDate =
+        `${month} ${updatedEducations[index].endDate.split(' ')[1]}`;
       return updatedEducations;
     });
   };
@@ -43,7 +47,8 @@ export default function Education({ educations, setEducations }) {
   const handleEndYearChange = (year, index) => {
     setEducations((prevEducations) => {
       const updatedEducations = [...prevEducations];
-      updatedEducations[index].endDate = `${updatedEducations[index].endDate.split(' ')[0]} ${year}`;
+      updatedEducations[index].endDate =
+        `${updatedEducations[index].endDate.split(' ')[0]} ${year}`;
       return updatedEducations;
     });
   };
@@ -73,7 +78,9 @@ export default function Education({ educations, setEducations }) {
   };
 
   const handleDeleteEducation = (indexToRemove) => {
-    setEducations(educations.filter((education, index) => index !== indexToRemove));
+    setEducations(educations.filter(
+      (education, index) => index !== indexToRemove)
+    );
     setEditingIndex(null);
   };
 
@@ -82,7 +89,11 @@ export default function Education({ educations, setEducations }) {
       <div className='section-header'>
         <h2>Education</h2>
         <div className='button-container'>
-          <Button label='Add Education' onClick={handleAddEducation} className='add-button' />
+          <Button
+            label='Add Education'
+            onClick={handleAddEducation}
+            className='add-button'
+          />
         </div>
       </div>
       {educations.map((education, index) => (
@@ -126,8 +137,10 @@ export default function Education({ educations, setEducations }) {
                   label='Start Date'
                   month={education.startDate.split(' ')[0]}
                   year={education.startDate.split(' ')[1]}
-                  onMonthChange={(month) => handleStartMonthChange(month, index)}
-                  onYearChange={(year) => handleStartYearChange(year, index)}
+                  onMonthChange={(month) =>
+                    handleStartMonthChange(month, index)}
+                  onYearChange={(year) =>
+                    handleStartYearChange(year, index)}
                 />
                 <DateInput
                   label='End Date'
@@ -138,15 +151,28 @@ export default function Education({ educations, setEducations }) {
                 />
               </div>
               <div className='form-button-container'>
-                <Button label='Delete' onClick={() => handleDeleteEducation(index)} className='delete-button' />
-                <Button label='Save' type='submit' />
+                <Button
+                  label='Delete'
+                  onClick={() => handleDeleteEducation(index)}
+                  className='delete-button'
+                />
+                <Button
+                  label='Save'
+                  type='submit'
+                />
               </div>
             </form>          
           ) : education.schoolName ? (
             <div className='form-container-closed'>
-              <p>{education.schoolName} ({education.startDate}—{education.endDate})</p>
+              <p>
+                {education.schoolName} ({education.startDate}—{education.endDate})
+              </p>
               <div className='button-container'>
-                <Button label='Edit' onClick={() => handleEdit(index)} className='edit-button' />
+                <Button
+                  label='Edit'
+                  onClick={() => handleEdit(index)}
+                  className='edit-button'
+                />
               </div>
             </div>            
           ) : null}

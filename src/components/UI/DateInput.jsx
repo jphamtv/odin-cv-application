@@ -1,13 +1,22 @@
 import PropTypes from 'prop-types'
 import './DateInput.css'
 
-export default function DateInput({ label, month, year, onMonthChange, onYearChange }) {
+export default function DateInput(
+  {
+    label,
+    month,
+    year,
+    onMonthChange,
+    onYearChange,
+  }) {
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  const years = Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i);
+  const years = Array.from(
+    { length: 50 }, (_, i) => new Date().getFullYear() - i
+  );
 
   return (
     <div className='date-input'>
