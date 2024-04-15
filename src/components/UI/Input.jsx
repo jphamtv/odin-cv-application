@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types'
-import './Input.css'
+import PropTypes from "prop-types";
+import "./Input.css";
 
 export default function Input({ type, label, name, value, onChange }) {
   return (
-    <div className='input'>
+    <div className="input">
       <label>{label}</label>
       <input name={name} type={type} value={value} onChange={onChange} />
     </div>

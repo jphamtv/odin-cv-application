@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types'
-import { useState } from 'react'
-import Input from './UI/Input';
-import Button from './UI/Button';
+import PropTypes from "prop-types";
+import { useState } from "react";
+import Input from "./UI/Input";
+import Button from "./UI/Button";
 
 export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
   const [isEditing, setIsEditing] = useState(true);
@@ -21,56 +21,52 @@ export default function PersonalInfo({ personalInfo, setPersonalInfo }) {
   };
 
   return (
-    <div className='section'>
+    <div className="section">
       <h2>Personal Information</h2>
       {isEditing ? (
-        <form onSubmit={handleSubmit} className='personal-info-form'>
-          <div className='row'>
+        <form onSubmit={handleSubmit} className="personal-info-form">
+          <div className="row">
             <Input
-              type='text'
-              label='Name'
-              name='fullName'
+              type="text"
+              label="Name"
+              name="fullName"
               value={personalInfo.fullName}
               onChange={handleChange}
             />
             <Input
-              type='email'
-              label='Email'
-              name='email'
+              type="email"
+              label="Email"
+              name="email"
               value={personalInfo.email}
               onChange={handleChange}
             />
           </div>
-          <div className='row'>
+          <div className="row">
             <Input
-              type='tel'
-              label='Phone Number'
-              name='phoneNumber'
+              type="tel"
+              label="Phone Number"
+              name="phoneNumber"
               value={personalInfo.phoneNumber}
               onChange={handleChange}
             />
             <Input
-              type='text'
-              label='LinkedIn URL'
-              name='linkedin'
+              type="text"
+              label="LinkedIn URL"
+              name="linkedin"
               value={personalInfo.linkedin}
               onChange={handleChange}
             />
           </div>
-          <div className='button-container'>
-            <Button label='Save' type='submit' />
+          <div className="button-container">
+            <Button label="Save" type="submit" />
           </div>
         </form>
       ) : (
-        <div className='section-header'>
+        <div className="section-header">
           <p>{personalInfo.fullName}</p>
-          <div className='button-container'>
-            <Button
-              label='Edit'
-              onClick={handleEdit}
-              className='edit-button'
-            /> 
-          </div>   
+          <div className="button-container">
+            <Button label="Edit" onClick={handleEdit} className="edit-button" />
+          </div>
         </div>
       )}
     </div>

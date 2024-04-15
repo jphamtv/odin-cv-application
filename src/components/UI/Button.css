@@ -8,7 +8,6 @@ button {
   background-color: #137bc0;
   cursor: pointer;
   transition: border-color 0.25s;
-  
 }
 
 button:hover {
